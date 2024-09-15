@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable } from 'typeorm';
-import { AeropuertoEntity } from 'src/aeropuerto/aeropuerto.entity/aeropuerto.entity';
+import { AeropuertoEntity } from '../../aeropuerto/aeropuerto.entity/aeropuerto.entity';
 
 @Entity('aerolinea')
 export class AerolineaEntity {
