@@ -1,4 +1,4 @@
-import {Controller, Get, Post, Put, Delete, Param, Body, HttpException, HttpStatus, UseInterceptors} from '@nestjs/common';
+import {Controller, Get, Post, Put, Delete, Param, Body, HttpException, HttpStatus, UseInterceptors, Res} from '@nestjs/common';
 import { AerolineaService } from './aerolinea.service';
 import { AerolineaEntity } from './aerolinea.entity/aerolinea.entity';
 import { BusinessErrorsInterceptor } from 'src/common/interceptors/business-errors/business-errors.interceptor';
@@ -49,12 +49,10 @@ export class AerolineaController {
     return await this.aerolineaService.update(id, aerolineaActualizada);
   }
 
-
-
-
   // Eliminar una aerolínea por id
   @Delete(':id')
-  async delete(@Param('id') id: number): Promise<void> {
-    return await this.aerolineaService.remove(id);
+  async delete(@Param('id') id: number, @Res() res): Promise<void> {
+     await this.aerolineaService.remove(id)
+     return res.status(204).send();
   }
 }

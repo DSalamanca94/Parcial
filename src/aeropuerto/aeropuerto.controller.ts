@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Param, Body, HttpException, HttpStatus, NotFoundException, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body, HttpException, HttpStatus, NotFoundException, UseInterceptors, Res } from '@nestjs/common';
 import { AeropuertoService } from './aeropuerto.service';
 import { AeropuertoDto } from './aeropuerto.dto/aeropuerto.dto';
 import { AeropuertoEntity } from './aeropuerto.entity/aeropuerto.entity';
@@ -52,7 +52,8 @@ export class AeropuertoController {
   
   // Eliminar un aeropuerto por su ID
   @Delete(':id')
-  async delete(@Param('id') id: number): Promise<void> {
-    await this.aeropuertoService.remove(id);
+  async delete(@Param('id') id: number, @Res() res): Promise<void> {
+   await this.aeropuertoService.remove(id);
+   return res.status(204).send();
   }
 }

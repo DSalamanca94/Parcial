@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Param, Body, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body, UseInterceptors, Res } from '@nestjs/common';
 import { AeropuertoAerolineaService } from './aeropuerto-aerolinea.service';
 import { AeropuertoEntity } from '../aeropuerto/aeropuerto.entity/aeropuerto.entity';
 import { AerolineaEntity } from '../aerolinea/aerolinea.entity/aerolinea.entity';
@@ -46,8 +46,10 @@ export class AeropuertoAerolineaController {
   @Delete(':airportId')
   async deleteAirportFromAirline(
     @Param('airlineId') airlineId: number,
-    @Param('airportId') airportId: number
+    @Param('airportId') airportId: number, 
+    @Res() res
   ): Promise<void> {
     await this.aeropuertoAerolineaService.deleteAirportFromAirline(airlineId, airportId);
+    return res.status(204).send();
   }
 }
